@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "تنجيم الأرقام"
+version = "1.0.0"
+id = "artifacts/star-numbers"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24221
+
+[services.development]
+run = "pnpm --filter @workspace/star-numbers run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/star-numbers", "run", "build" ]
+publicDir = "artifacts/star-numbers/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24221"
+BASE_PATH = "/"
